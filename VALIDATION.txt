@@ -1,0 +1,73 @@
+Verified: 2026-11-10 (Asia/Shanghai)
+Command: bash tests/run.sh
+Environment: Linux amd64; Docker Engine 29.4.3; Docker Compose v2.40.3
+Runtime: Redis 8.10.3; PHP 8.5.12; ext-redis 6.3.0; pdo_mysql enabled
+Redis public image: redis:alpine
+Redis digest: sha256:71885d8cc6e42f2bc0aa2eb853bfc4be200b5108a46ac50e117ae1df0531fb80
+PHP public base image: php:cli-alpine
+PHP digest: sha256:d1fbbe78850d1eb9aa8f7da652ec5db61eb4c9377c8215cf5e23f3b528ed4f2b
+
+PASS: Compose configuration parses
+PASS: PHP tool image builds from the public official base with both extensions
+PASS: all 5 PHP files pass syntax checks
+PASS: CLI Usage: php demo.php init < ids.txt | add ID | check ID
+PASS: CLI rejects a missing ID
+PASS: AOF persistence is enabled
+PASS: uninitialized lookup is UNKNOWN
+PASS: writes rejected before initialization
+PASS: full input publishes READY
+PASS: initialized item 1001
+PASS: initialized item 1002
+PASS: initialized item 550e8400-e29b-41d4-a716-446655440000
+PASS: fixture missing item is ABSENT
+PASS: incremental and repeated add are safe
+PASS: empty write ID rejected
+PASS: 300 UTF-8 IDs have no false negatives
+PASS: invalid m is UNKNOWN
+PASS: invalid m rejects writes
+PASS: invalid k is UNKNOWN
+PASS: invalid k rejects writes
+PASS: invalid algorithm is UNKNOWN
+PASS: invalid algorithm rejects writes
+PASS: invalid run_id is UNKNOWN
+PASS: invalid run_id rejects writes
+PASS: invalid state is UNKNOWN
+PASS: invalid state rejects writes
+PASS: source scan failure is observable
+PASS: failed scan never publishes READY
+PASS: partially built filter is UNKNOWN
+PASS: superseded build cannot load
+PASS: newer build remains usable
+PASS: superseded build cannot publish
+PASS: newer published build remains usable
+PASS: Lua rejects an out-of-range position
+PASS: invalid Lua input does not partially set bits
+PASS: missing bitmap is UNKNOWN
+PASS: truncated bitmap is UNKNOWN
+PASS: wrong bitmap type is UNKNOWN
+PASS: missing metadata is UNKNOWN
+PASS: wrong metadata type is UNKNOWN
+PASS: complete empty dataset can be published
+PASS: empty dataset lookup is ABSENT
+PASS: CLI MAYBE
+PASS: CLI ABSENT
+PASS: CLI ADDED
+PASS: CLI READY, input rows: 3
+PASS: CLI ADDED
+PASS: metadata is READY before restart
+PASS: CLI UNKNOWN
+PASS: Redis process identity changed
+PASS: AOF reload preserves exact bitmap
+PASS: AOF restored old READY metadata
+PASS: restart forces UNKNOWN despite restored READY
+PASS: writes rejected until rebuild after restart
+PASS: rebuilt dataset retains 1001
+PASS: rebuilt dataset retains 1002
+PASS: rebuilt dataset retains 550e8400-e29b-41d4-a716-446655440000
+PASS: rebuilt dataset retains 1003
+PASS: rebuild restores negative lookup
+PASS: stopped Redis server is UNKNOWN
+
+EXPECTED: Bloom lookup errors are logged during wrong-type and actual Redis shutdown tests.
+NOT RUN: real MySQL transactions, power-loss durability, Redis Cluster/failover.
+CLEANUP: isolated test containers, network and data volume removed; existing services untouched.
